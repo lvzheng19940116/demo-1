@@ -26,6 +26,7 @@ public class PathTest {
 		System.out.println(resource);
 		URL resource2 = App.class.getResource("");
 		System.out.println(resource2);
+		
 //		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 //		HttpServletRequest request = attributes.getRequest();
 //		String contextPath = request.getContextPath();
