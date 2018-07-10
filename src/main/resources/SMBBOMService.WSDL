@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetSMBStandardPriceList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="parameterList" type="tns:ArrayOfSMBParameterModel" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSMBParameterModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SMBParameterModel" nillable="true" type="tns:SMBParameterModel" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SMBParameterModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="BOMCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductGroupCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSMBStandardPriceListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSMBStandardPriceListResult" type="tns:SMBReturnModel" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SMBReturnModel">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="returnFlag" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="returnMsg" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="standardPriceList" type="tns:ArrayOfSMBStandardPriceModel" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfSMBStandardPriceModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SMBStandardPriceModel" nillable="true" type="tns:SMBStandardPriceModel" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SMBStandardPriceModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="BOMCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActualCostPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="BOCostPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="CostSupportPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="StrictControlPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="SalesManagerPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="SaleCostPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="AgentPrice" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetSMBStandardPriceListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSMBStandardPriceList" />
+  </wsdl:message>
+  <wsdl:message name="GetSMBStandardPriceListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSMBStandardPriceListResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SMBBOMServiceSoap">
+    <wsdl:operation name="GetSMBStandardPriceList">
+      <wsdl:input message="tns:GetSMBStandardPriceListSoapIn" />
+      <wsdl:output message="tns:GetSMBStandardPriceListSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SMBBOMServiceSoap" type="tns:SMBBOMServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSMBStandardPriceList">
+      <soap:operation soapAction="http://tempuri.org/GetSMBStandardPriceList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SMBBOMService">
+    <wsdl:port name="SMBBOMServiceSoap" binding="tns:SMBBOMServiceSoap">
+      <soap:address location="http://10.96.39.118:8083/SMBBOMService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
