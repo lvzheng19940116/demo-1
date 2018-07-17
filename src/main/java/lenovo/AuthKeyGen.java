@@ -63,10 +63,10 @@ public class AuthKeyGen {
 		String client_secret = "C36A9665558242478A458CDA320A153B";
 		
 		// //权限
-		// String appKey = "FA0C4B2415AD407691074E49AA892059";
-		// System.out.println("MSP-AppKey : " + appKey);
-		// String client_id = "593D6ECB8933491082FFE55BB2E2E63E";
-		// String client_secret = "7051FD3F43B54099A6B8240434910DB8";
+//		 String appKey = "FA0C4B2415AD407691074E49AA892059";
+//		 System.out.println("MSP-AppKey : " + appKey);
+//		 String client_id = "593D6ECB8933491082FFE55BB2E2E63E";
+//		 String client_secret = "7051FD3F43B54099A6B8240434910DB8";
 		
 		// //权限
 		// String appKey = "C47660F7A5D844CA9D1976AC544DC6B9";
