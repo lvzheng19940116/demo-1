@@ -1,5 +1,7 @@
 package com.example.demo.test;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -33,6 +35,8 @@ public class Emp {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int eid;
 	private String name;
+	private String sect;
+	private String effort;
     @CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(updatable = false)
@@ -40,36 +44,18 @@ public class Emp {
 	@Temporal(TemporalType.TIMESTAMP)
 	@UpdateTimestamp
 	private Date date2;
-	// private int gid;
-
-	// @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},fetch=FetchType.EAGER,optional=false)
-	// @JoinColumn(name="order_id")
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = true)
-	@JoinColumn(name = "ttt")
+	@JoinColumn(name = "ttt",insertable = false, updatable = false)
 	@JsonBackReference
 	private User user;
-
-	// public User getUser() {
-	// return user;
-	// }
-	// public void setUser(User user) {
-	// this.user = user;
-	// }
-	// public int getEid() {
-	// return eid;
-	// }
-	// public void setEid(int eid) {
-	// this.eid = eid;
-	// }
-	// public String getName() {
-	// return name;
-	// }
-	// public void setName(String name) {
-	// this.name = name;
-	// }
-	// @Override
-	// public String toString() {
-	// return "Emp [eid=" + eid + ", name=" + name + ", user=" + user + "]";
-	// }
-
+//	public static void main(String[] args) throws Exception, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+//		Emp emp=new Emp();
+//		emp.setEid(1);
+//		emp.setName("吕正");
+//		System.out.println(emp);
+//		Class<? extends Emp> class1 = emp.getClass();
+//		Field declaredField = class1.getDeclaredField("name");
+//		String object = (String)declaredField.get(emp);
+//		System.out.println(object);
+//	}
 }

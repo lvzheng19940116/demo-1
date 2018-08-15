@@ -1,10 +1,11 @@
 package guava;
 
 import java.util.ArrayList;
-
-import org.apache.ibatis.annotations.Property;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
 *以动手实践为荣,以只看不练为耻.
@@ -27,6 +28,8 @@ public class GuavaTest {
 		//@Property
 		
 		ArrayList<Object> newArrayList = Lists.newArrayList();
+		HashMap<Object, Object> newHashMap = Maps.newHashMap();
+		Map<String,Object > map=new HashMap<String,Object>(256);
 	}
 	
 	

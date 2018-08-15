@@ -51,16 +51,16 @@ public class AuthKeyGen {
 		// LOG.info("~~~~~~~~~~~~~");
 		
 //		// 订单
-//		 String appKey = "9F4E4F9A379C47C38FD598EB5DB0CE37";
-//		 System.out.println("MSP-AppKey : " + appKey);
-//		 String client_id = "7A040F4F27CD48E48CF3D7E8D89F05B4";
-//		 String client_secret = "6A87231D8FC4456A9C97924556F3860B";
+		 String appKey = "9F4E4F9A379C47C38FD598EB5DB0CE37";
+		 System.out.println("MSP-AppKey : " + appKey);
+		 String client_id = "7A040F4F27CD48E48CF3D7E8D89F05B4";
+		 String client_secret = "6A87231D8FC4456A9C97924556F3860B";
 		
 //		// 合同
-		String appKey = "C4C8FBF74A12429B91E916DE9EED7144";
-		System.out.println("MSP-AppKey : " + appKey);
-		String client_id = "EEC05A24D05A4E38ABFC09B9AD01E8B6";
-		String client_secret = "C36A9665558242478A458CDA320A153B";
+//		String appKey = "C4C8FBF74A12429B91E916DE9EED7144";
+//		System.out.println("MSP-AppKey : " + appKey);
+//		String client_id = "EEC05A24D05A4E38ABFC09B9AD01E8B6";
+//		String client_secret = "C36A9665558242478A458CDA320A153B";
 		
 		// //权限
 //		 String appKey = "FA0C4B2415AD407691074E49AA892059";
