@@ -1,4 +1,4 @@
-package com.example.demo.time;
+package time;
 
 import java.util.Calendar;
 import java.util.Date;

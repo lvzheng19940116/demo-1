@@ -1,4 +1,4 @@
-package inetAdress;
+package path;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,7 +15,7 @@ import java.net.URL;
  *
  * @author LvZheng 创建时间：2018年7月11日 上午9:53:35
  */
-public class URLTest {
+public class HttpTest {
 	public static void main(String[] args) throws MalformedURLException {
 		BufferedReader in = null;
 		String result = null;
