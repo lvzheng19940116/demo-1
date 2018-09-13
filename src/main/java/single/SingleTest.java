@@ -15,7 +15,7 @@ public class SingleTest {
 	};
 
 	// 锁的模板
-	// 经典的 双重检查
+	// 经典的 双重检查   由于编译优化原因，jvm底层内部模型原因。偶尔会出问题不建议使用
 	public static SingleTest getInstance() {
 		// abc 提高已经存在对象的效率
 		if (null == instance) {
