@@ -12,6 +12,10 @@ public class SingleTest {
 	private static SingleTest instance = null;
 
 	private SingleTest() {
+		//防止反射破解单例
+		if (instance!=null){
+			throw new RuntimeException();
+		}
 	};
 
 	// 锁的模板

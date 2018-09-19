@@ -30,7 +30,16 @@ public class RunnableTest implements Runnable{
 		for (int i = 0; i < 1000; i++) {
 			System.out.println("a"+i);
 		}
-		
+
+
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+
+			}
+		});
+
+
 	}
 }
 

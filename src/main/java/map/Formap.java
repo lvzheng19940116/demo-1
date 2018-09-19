@@ -19,10 +19,11 @@ public class Formap {
 		map.put("a", "1");
 		map.put("bb", "1");
 		map.put("b", "1");
-		//Lambda 获取key and value
+		//Lambda 获取key and value 自己手写
 		map.forEach((key,value)->{
 			System.out.println(key+":"+value);
 		});
+
 		System.out.println("----------");
 		//遍历map
 		for (Object  string : map.values()) {

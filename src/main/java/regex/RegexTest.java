@@ -1,5 +1,6 @@
 package regex;
 
+import java.util.Random;
 import java.util.regex.Pattern;
 
 /**
@@ -19,5 +20,13 @@ public class RegexTest {
 		// 通过pattern类的静态函数matchs去判定字符串是否满足这样一个条件
 		System.out.println(Pattern.matches(regex, knights));
 		// 输出结果是true
+
+
+		Random r=new Random(10);
+
+		int i = r.nextInt(10);
+		System.out.println(i);
+
+
 	}
 }
