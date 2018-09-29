@@ -1,45 +1,36 @@
 package ad.util;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpException;
+import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 
-import org.apache.commons.httpclient.HttpException;
-import org.apache.commons.httpclient.methods.PostMethod;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.CoreConnectionPNames;
-import org.apache.http.util.EntityUtils;
+public class HttpConnection {
+    private static final String APPLICATION_JSON = "application/json";
+    private static final String CONTENT_TYPE_TEXT_JSON = "text/json";
 
-import net.sf.json.JSONSerializer;
-
-
-public class HttpConnection {   	    
-    private static final String APPLICATION_JSON = "application/json";  
-    private static final String CONTENT_TYPE_TEXT_JSON = "text/json"; 
-    
     public static String serverURL = Constends.serverURL; //内网测试环境的权限管理 在公司用
-    
+
     public static String sendPost(String url, String param) {
 
 		PrintWriter out = null;
@@ -90,45 +81,47 @@ public class HttpConnection {
 		}
 		return result;
 	}
-    
+
     /**
-     * post请求
-     * @param url地址
-     * @param jsonParam 参数
+     *
+     * @param url
+     * @param jsonParam
+     * @param token
      * @return
      */
     public static String httpPost(String url,String jsonParam,String token){
-        DefaultHttpClient httpClient = new DefaultHttpClient();//post请求返回结果
-        httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 2000);
-        httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 2000);
-        ResponseHandler<String> responseHandler = new BasicResponseHandler(); 
-        HttpPost post = new HttpPost(url);String str = "";
-        post.setHeader("Content-type", "application/json; charset=utf-8");
-        post.setHeader("Connection", "Close");   
-        post.addHeader("token",token);
-        try {
-            if (null != jsonParam) {
-                //解决中文乱码问题
-                StringEntity entity = new StringEntity(jsonParam, "utf-8");
-                entity.setContentEncoding("UTF-8");
-                entity.setContentType("application/json");
-                post.setEntity(entity);
-            }
-            HttpResponse result = httpClient.execute(post);
-            url = URLDecoder.decode(url, "UTF-8");
-            //if (result.getStatusLine().getStatusCode() == 200) {/**请求发送成功，并得到响应**/
-                try {
-                    str = EntityUtils.toString(result.getEntity());/**读取服务器返回过来的json字符串数据**/
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            //}
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        DefaultHttpClient httpClient = new DefaultHttpClient();//post请求返回结果
+//        httpClient.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 2000);
+//        httpClient.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 2000);
+//        ResponseHandler<String> responseHandler = new BasicResponseHandler();
+//        HttpPost post = new HttpPost(url);String str = "";
+//        post.setHeader("Content-type", "application/json; charset=utf-8");
+//        post.setHeader("Connection", "Close");
+//        post.addHeader("token",token);
+//        try {
+//            if (null != jsonParam) {
+//                //解决中文乱码问题
+//                StringEntity entity = new StringEntity(jsonParam, "utf-8");
+//                entity.setContentEncoding("UTF-8");
+//                entity.setContentType("application/json");
+//                post.setEntity(entity);
+//            }
+//            HttpResponse result = httpClient.execute(post);
+//            url = URLDecoder.decode(url, "UTF-8");
+//            //if (result.getStatusLine().getStatusCode() == 200) {/**请求发送成功，并得到响应**/
+//                try {
+//                    str = EntityUtils.toString(result.getEntity());/**读取服务器返回过来的json字符串数据**/
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            //}
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        String str=null;
         return str;
     }
-    
+
     public static String HttpGET(Map params,String url){
     	String token = "";
     	if(params!=null && params.size()>0){
@@ -141,36 +134,36 @@ public class HttpConnection {
 				url += key+"="+params.get(key)+"&";
 			}
 		}
-    	
+
         HttpGet get = new HttpGet(url);
         if(token.length()>0){
         	get.addHeader("token",token);
-        } 
+        }
         org.apache.http.client.HttpClient client = new DefaultHttpClient();
         String temp = "";
         try {
-             
+
             HttpResponse response = client.execute(get);
             HttpEntity entity = response.getEntity();
            temp = EntityUtils.toString(entity, "UTF-8");
-             
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        return temp; 
+
+        return temp;
     }
-    
-    
+
+
     public static String HttpPost(Map pa,String url){
     	//httpClient
     	org.apache.http.client.HttpClient httpClient = new DefaultHttpClient();
 
         // get method
-        HttpPost httpPost = new HttpPost(url);    
+        HttpPost httpPost = new HttpPost(url);
         String token = "";
         // set header
-        httpPost.setHeader("Content-Type","application/x-www-form-urlencoded"); 
+        httpPost.setHeader("Content-Type","application/x-www-form-urlencoded");
 
         //set params
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -183,30 +176,30 @@ public class HttpConnection {
 				params.add(new BasicNameValuePair(key,(String)pa.get(key)));
 			}
 		}
-        
+
         if(token.length()>0){
         	httpPost.addHeader("token",token);
-        } 
+        }
         try{
             httpPost.setEntity(new UrlEncodedFormEntity(params));
-        }catch (Exception e) {} 
+        }catch (Exception e) {}
 
         //response
-        HttpResponse response = null;  
+        HttpResponse response = null;
         try{
             response = httpClient.execute(httpPost);
         }catch (Exception e) {}
-        
+
         //get response into String
         String temp="";
         try{
             HttpEntity entity = response.getEntity();
             temp=EntityUtils.toString(entity,"UTF-8");
         }catch (Exception e) {}
-        
-        return temp; 
+
+        return temp;
     }
-    
+
     /******************
      * 根据指定参数 访问url获取返回值
      * @param params
@@ -223,9 +216,9 @@ public class HttpConnection {
 			}
 		}
 		HttpClient client = new HttpClient();
-		
+
 		PostMethod httpPost = new PostMethod(url);
-		
+
 		try {
 			client.executeMethod(httpPost);
 			if(httpPost.getStatusCode()==200){
@@ -240,33 +233,33 @@ public class HttpConnection {
 		}
 		return re;
     }
-   
-	
-    
- 
+
+
+
+
 	/*public static void main(String[] args) {
-		
-		
+
+
 		Map map1 = new HashMap();
 		map1.put("userAccount", "usera19");
 		map1.put("mobTel", "18866655515");
 		map1.put("email", "556666991@qq.com");
 		map1.put("userPassword", "12346");
 		map1.put("siteCode", "webUser");
-		
+
 		map1.put("userId", "c55e3b4d223842bd93183fe16ebdb857");
 		map1.put("roleId", "78");
 		//map1.put("token", "ca1ee1ef8d574ad491782a10c6b49314");
-		
-		
+
+
 		String url = HttpConnection.serverURL+"/updateUserRole.action";
 		String pa = JSONSerializer.toJSON(map1).toString();
 		String data = HttpConnection.httpPost(url,pa,"ca1ee1ef8d574ad491782a10c6b49314");
-		
+
 		//String data = HttpConnection.HttpGET(map1,url);
 		System.out.println(url);
 		System.out.println(pa+"******************"+data);
-		
+
 		JSONObject jsonobject = JSONObject.fromObject(data);
 		JSONObject data3 = (JSONObject) jsonobject.get("data");
 		System.out.println(data3.get("userId"));
@@ -280,22 +273,22 @@ public class HttpConnection {
 					System.out.println(token2);
 				}
 			} catch (Exception e) {
-				
+
 			}
 		}
 		else{
 			System.out.println(jsonObject.getString("message"));
 		}
-		
-		
-		JSONObject jsonObject = (JSONObject)JSONSerializer.toJSON(data);    
+
+
+		JSONObject jsonObject = (JSONObject)JSONSerializer.toJSON(data);
 		try{
-			int userID = jsonObject.getJSONObject("user").getInt("userID"); 
+			int userID = jsonObject.getJSONObject("user").getInt("userID");
 		}catch(Exception e){}
-		
+
 	}*/
-  
-}  
+
+}
 
 
 
