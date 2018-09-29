@@ -55,7 +55,7 @@ public class AuthKeyGen {
 		 System.out.println("MSP-AppKey : " + appKey);
 		 String client_id = "7A040F4F27CD48E48CF3D7E8D89F05B4";
 		 String client_secret = "6A87231D8FC4456A9C97924556F3860B";
-		
+//
 //		// 合同
 //		String appKey = "C4C8FBF74A12429B91E916DE9EED7144";
 //		System.out.println("MSP-AppKey : " + appKey);
