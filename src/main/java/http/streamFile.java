@@ -1,16 +1,10 @@
-package path;
+package http;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import javax.servlet.http.HttpServletResponse;
 
 /**
 *以动手实践为荣,以只看不练为耻.

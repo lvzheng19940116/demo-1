@@ -1,11 +1,6 @@
-package path;
+package http;
 
 import java.net.URL;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
 *以动手实践为荣,以只看不练为耻.

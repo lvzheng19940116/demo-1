@@ -307,12 +307,12 @@ public class FTPUtil {
 		String user = "chenchao";
 		String pass = "123456";
 		int port = 21;
-		String path = "ftp上传路径";
+		String http = "ftp上传路径";
 		String localfile = "D:/ceshi.jpg";
 		String remotefile = "ftp上传路径/javaftp测试.jpg";
 
 		try {
-			ftp.connectServer(ftpIP, port, user, pass, path);
+			ftp.connectServer(ftpIP, port, user, pass, http);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
