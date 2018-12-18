@@ -20,12 +20,19 @@ public class RegexTest {
 		// 通过pattern类的静态函数matchs去判定字符串是否满足这样一个条件
 		System.out.println(Pattern.matches(regex, knights));
 		// 输出结果是true
-
-
 		Random r=new Random(10);
-
 		int i = r.nextInt(10);
 		System.out.println(i);
+
+		String str="{provinceId=[22], cityId=[1930], countyId=[50947], townId=[52198]};";
+		String s = str.replaceAll("\\[", "").replaceAll("\\]", "").replaceAll("=", ":").replaceAll("\\{", "")
+				.replaceAll("\\}", "").replaceAll(";", "");
+		String[] split = s.split(",");
+		StringBuffer stringBuffer=new StringBuffer();
+		for (String s1 : split) {
+			stringBuffer.append(s1+"\n");
+		}
+		System.out.println(stringBuffer.toString());
 
 
 	}

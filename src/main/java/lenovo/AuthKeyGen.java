@@ -37,11 +37,12 @@ public class AuthKeyGen {
 			e.printStackTrace();
 		}
 
-		if (length == 16)
+		if (length == 16){
 			return sb.toString().substring(8, 24);
-		else
+		}
+		else {
 			return sb.toString();
-
+		}
 	}
 
 	public static void main(String[] args) {
@@ -51,10 +52,10 @@ public class AuthKeyGen {
 		// LOG.info("~~~~~~~~~~~~~");
 		
 //		// 订单
-		 String appKey = "9F4E4F9A379C47C38FD598EB5DB0CE37";
-		 System.out.println("MSP-AppKey : " + appKey);
-		 String client_id = "7A040F4F27CD48E48CF3D7E8D89F05B4";
-		 String client_secret = "6A87231D8FC4456A9C97924556F3860B";
+//		 String appKey = "9F4E4F9A379C47C38FD598EB5DB0CE37";
+//		 System.out.println("MSP-AppKey : " + appKey);
+//		 String client_id = "7A040F4F27CD48E48CF3D7E8D89F05B4";
+//		 String client_secret = "6A87231D8FC4456A9C97924556F3860B";
 //
 //		// 合同
 //		String appKey = "C4C8FBF74A12429B91E916DE9EED7144";
@@ -69,10 +70,14 @@ public class AuthKeyGen {
 //		 String client_secret = "7051FD3F43B54099A6B8240434910DB8";
 		
 		// //权限
-		// String appKey = "C47660F7A5D844CA9D1976AC544DC6B9";
-		// System.out.println("MSP-AppKey : " + appKey);
-		// String client_id = "168E9C9A4ED14CECB1FEA97BB152C963";
-		// String client_secret = "0AE005BDE2394DE0BD992B77D60A0B3F";
+		 String appKey = "C47660F7A5D844CA9D1976AC544DC6B9";
+		 System.out.println("MSP-AppKey : " + appKey);
+		 String client_id = "168E9C9A4ED14CECB1FEA97BB152C963";
+		 String client_secret = "0AE005BDE2394DE0BD992B77D60A0B3F";
+		//17商城
+//		String appKey = "99251023BA7549EAAA5AE76B2A4105CA";
+//		String client_id = "D66D5E88D26F499DA0B908A535D57922";
+//		String client_secret = "6285985EA18B43F3891ACF8DCA6FF62A";
 		AuthKeyGen akg = new AuthKeyGen();
 		String authKey = akg.getAuthKey(client_id, client_secret);
 		System.out.println("MSP-AuthKey: " + authKey);

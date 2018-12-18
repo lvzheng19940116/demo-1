@@ -1,4 +1,4 @@
-//package bigSmall,
+//package decimal,
 ///**
 //*以动手实践为荣,以只看不练为耻.
 //*以打印日志为荣,以出错不报为耻.
