@@ -1,9 +1,9 @@
 package ann;
 
 
-@Ann(value="temp")
+//@Ann(value="temp")
 public class Temp {
-	@Ann(value="id")
+	//@Ann(value="id")
 	private int id;
 	private String status;
 	private String sex;
@@ -24,6 +24,16 @@ public class Temp {
 	}
 	public void setSex(String sex) {
 		this.sex = sex;
+	}
+
+	public void add(){
+
+
+	}
+
+	public void update(){
+
+
 	}
 	
 }

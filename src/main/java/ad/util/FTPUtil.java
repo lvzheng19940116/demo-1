@@ -1,328 +1,340 @@
 package ad.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.InetSocketAddress;
-import java.net.SocketAddress;
-
 import sun.net.TelnetInputStream;
 import sun.net.ftp.FtpClient;
 import sun.net.ftp.FtpProtocolException;
 
+import java.io.*;
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
+
 public class FTPUtil {
 
-	private String localfilename;
+    private String localfilename;
 
-	private String remotefilename;
+    private String remotefilename;
 
-	private FtpClient ftpClient;
+    private FtpClient ftpClient;
 
-	public void connectServer(String ip, int port, String user, String password, String path)
-			throws FtpProtocolException
+    public void connectServer(String ip, int port, String user, String password, String path)
+            throws FtpProtocolException
 
-	{
+    {
 
-		try {
+        try {
 
-			ftpClient = FtpClient.create();
+            ftpClient = FtpClient.create();
 
-			try {
+            try {
 
-				SocketAddress addr = new InetSocketAddress(ip, port);
+                SocketAddress addr = new InetSocketAddress(ip, port);
 
-				ftpClient.connect(addr);
+                ftpClient.connect(addr);
 
-				ftpClient.login(user, password.toCharArray());
+                ftpClient.login(user, password.toCharArray());
 
-				System.out.println("login success!");
+                System.out.println("login success!");
 
-				if (path.length() != 0) {
+//                if (path.length() != 0) {
+//
+//                    // 把远程系统上的目录切换到参数path所指定的目录
+//
+//                    ftpClient.changeDirectory(path);
+//
+//                }
 
-					// 把远程系统上的目录切换到参数path所指定的目录
+            } catch (FtpProtocolException e) {
 
-					ftpClient.changeDirectory(path);
+                // TODO Auto-generated catch block
 
-				}
+                e.printStackTrace();
 
-			} catch (FtpProtocolException e) {
+            }
 
-				// TODO Auto-generated catch block
+        } catch (IOException ex) {
 
-				e.printStackTrace();
+            ex.printStackTrace();
 
-			}
+            throw new RuntimeException(ex);
 
-		} catch (IOException ex) {
+        }
 
-			ex.printStackTrace();
+    }
 
-			throw new RuntimeException(ex);
+    public void closeConnect()
 
-		}
+    {
 
-	}
+        try
 
-	public void closeConnect()
+        {
 
-	{
+            ftpClient.close();
 
-		try
+            System.out.println("disconnect success");
 
-		{
+        } catch (IOException ex)
 
-			ftpClient.close();
+        {
 
-			System.out.println("disconnect success");
+            System.out.println("not disconnect");
 
-		} catch (IOException ex)
+            ex.printStackTrace();
 
-		{
+            throw new RuntimeException(ex);
 
-			System.out.println("not disconnect");
+        }
 
-			ex.printStackTrace();
+    }
 
-			throw new RuntimeException(ex);
+    public boolean upload(String localFile, String remoteFile) throws FtpProtocolException
 
-		}
+    {
 
-	}
+        this.localfilename = localFile;
 
-	public boolean upload(String localFile, String remoteFile) throws FtpProtocolException
+        this.remotefilename = remoteFile;
 
-	{
+        OutputStream os = null;
 
-		this.localfilename = localFile;
+        FileInputStream is = null;
 
-		this.remotefilename = remoteFile;
+        boolean flage = false;
 
-		OutputStream os = null;
+        try
 
-		FileInputStream is = null;
+        {
 
-		boolean flage = false;
+            // 将远程文件加入输出流中
 
-		try
+            os = (OutputStream) ftpClient.putFileStream(this.remotefilename, true);
 
-		{
+            // 获取本地文件的输入流
 
-			// 将远程文件加入输出流中
+            File file_in = new File(this.localfilename);
 
-			os = (OutputStream) ftpClient.putFileStream(this.remotefilename, true);
+            is = new FileInputStream(file_in);
 
-			// 获取本地文件的输入流
+            // 创建一个缓冲区
 
-			File file_in = new File(this.localfilename);
+            byte[] bytes = new byte[1024];
 
-			is = new FileInputStream(file_in);
+            int c;
 
-			// 创建一个缓冲区
+            while ((c = is.read(bytes)) != -1)
 
-			byte[] bytes = new byte[1024];
+            {
 
-			int c;
+                os.write(bytes, 0, c);
 
-			while ((c = is.read(bytes)) != -1)
+            }
 
-			{
+            System.out.println("upload success");
 
-				os.write(bytes, 0, c);
+            flage = true;
 
-			}
+            // return true;
 
-			System.out.println("upload success");
+        } catch (IOException ex)
 
-			flage = true;
+        {
 
-			// return true;
+            System.out.println("not upload");
 
-		} catch (IOException ex)
+            ex.printStackTrace();
 
-		{
+            flage = false;
 
-			System.out.println("not upload");
+            throw new RuntimeException(ex);
 
-			ex.printStackTrace();
+        } finally
 
-			flage = false;
+        {
 
-			throw new RuntimeException(ex);
+            try
 
-		} finally
+            {
 
-		{
+                if (is != null)
 
-			try
+                {
 
-			{
+                    is.close();
 
-				if (is != null)
+                }
 
-				{
+            } catch (IOException e)
 
-					is.close();
+            {
 
-				}
+                e.printStackTrace();
 
-			} catch (IOException e)
+            } finally
 
-			{
+            {
 
-				e.printStackTrace();
+                try
 
-			} finally
+                {
 
-			{
+                    if (os != null)
 
-				try
+                    {
 
-				{
+                        os.close();
 
-					if (os != null)
+                    }
 
-					{
+                } catch (IOException e)
 
-						os.close();
+                {
 
-					}
+                    e.printStackTrace();
 
-				} catch (IOException e)
+                }
 
-				{
+            }
 
-					e.printStackTrace();
+        }
 
-				}
+        return flage;
 
-			}
+    }
 
-		}
+    public void download(String remoteFile, String localFile) throws FtpProtocolException
 
-		return flage;
+    {
 
-	}
+        TelnetInputStream is = null;
 
-	public void download(String remoteFile, String localFile) throws FtpProtocolException
+        FileOutputStream os = null;
 
-	{
+        try
 
-		TelnetInputStream is = null;
+        {
 
-		FileOutputStream os = null;
+            // 获取远程机器上的文件filename，借助TelnetInputStream把该文件传送到本地。
 
-		try
+            is = (TelnetInputStream) ftpClient.getFileStream(remoteFile);
 
-		{
+            File file_in = new File(localFile);
 
-			// 获取远程机器上的文件filename，借助TelnetInputStream把该文件传送到本地。
+            os = new FileOutputStream(file_in);
 
-			is = (TelnetInputStream) ftpClient.getFileStream(remoteFile);
+            byte[] bytes = new byte[1024];
 
-			File file_in = new File(localFile);
+            int c;
 
-			os = new FileOutputStream(file_in);
+            while ((c = is.read(bytes)) != -1)
 
-			byte[] bytes = new byte[1024];
+            {
 
-			int c;
+                os.write(bytes, 0, c);
 
-			while ((c = is.read(bytes)) != -1)
+            }
 
-			{
+            System.out.println("download success");
 
-				os.write(bytes, 0, c);
+        } catch (IOException ex)
 
-			}
+        {
 
-			System.out.println("download success");
+            System.out.println("not download");
 
-		} catch (IOException ex)
+            ex.printStackTrace();
 
-		{
+            throw new RuntimeException(ex);
 
-			System.out.println("not download");
+        } finally
 
-			ex.printStackTrace();
+        {
 
-			throw new RuntimeException(ex);
+            try
 
-		} finally
+            {
 
-		{
+                if (is != null)
 
-			try
+                {
 
-			{
+                    is.close();
 
-				if (is != null)
+                }
 
-				{
+            } catch (IOException e)
 
-					is.close();
+            {
 
-				}
+                e.printStackTrace();
 
-			} catch (IOException e)
+            } finally
 
-			{
+            {
 
-				e.printStackTrace();
+                try
 
-			} finally
+                {
 
-			{
+                    if (os != null)
 
-				try
+                    {
 
-				{
+                        os.close();
 
-					if (os != null)
+                    }
 
-					{
+                } catch (IOException e)
 
-						os.close();
+                {
 
-					}
+                    e.printStackTrace();
 
-				} catch (IOException e)
+                }
 
-				{
+            }
 
-					e.printStackTrace();
+        }
 
-				}
+    }
 
-			}
+    public static void main(String agrs[]) {
+        FTPUtil ftp = new FTPUtil();
+        String ftpIP = "10.96.20.167";
+        String user = "In_USF_P";
+        String pass = "Initial0@P";
+        int port = 21;
+        String http = "ftp上传路径";
+//        String localfile = "D:/ceshi.jpg";
+//        String remotefile = "ftp上传路径/javaftp测试.jpg";
+        String localfile = "/Users/lvzheng/Downloads/";
+        String remotefile = "LMSMobility_Photo/EmployeePhotoFromAD20150806_5.zip";
 
-		}
+        try {
+            ftp.connectServer(ftpIP, port, user, pass, http);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            ftp.download(remotefile,localfile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-	}
 
-	/*public static void main(String agrs[]) {
-		FTPUtil ftp = new FTPUtil();
-		String ftpIP = "127.0.0.1";
-		String user = "chenchao";
-		String pass = "123456";
-		int port = 21;
-		String http = "ftp上传路径";
-		String localfile = "D:/ceshi.jpg";
-		String remotefile = "ftp上传路径/javaftp测试.jpg";
+//		try {
+//			ftp.connectServer(ftpIP, port, user, pass, http);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		try {
+//			ftp.upload(localfile, remotefile); // 上传
+//		} catch (FtpProtocolException e) {
+//			e.printStackTrace();
+//		}
 
-		try {
-			ftp.connectServer(ftpIP, port, user, pass, http);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
-		try {
-			ftp.upload(localfile, remotefile); // 上传
-		} catch (FtpProtocolException e) {
-			e.printStackTrace();
-		}
-		ftp.closeConnect();
-	}*/
+        ftp.closeConnect();
+    }
 
 }

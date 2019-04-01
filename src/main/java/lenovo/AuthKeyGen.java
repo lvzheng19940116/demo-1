@@ -4,53 +4,51 @@ import java.security.MessageDigest;
 import java.sql.Timestamp;
 
 /**
- * 
  * @author LvZheng 创建时间：2018年1月29日 下午5:11:38
  */
 public class AuthKeyGen {
 
-	// private static final Logger LOG = Logger.getLogger(AuthKeyGen.class);
+    // private static final Logger LOG = Logger.getLogger(AuthKeyGen.class);
 
-	public String getAuthKey(String client_id, String client_secret) {
-		Timestamp now = new Timestamp(System.currentTimeMillis());
-		String authInfo_plain = client_id + client_secret + "AT" + now.getTime();
-		String authInfo_md5 = getMD5(authInfo_plain, 16);
-		// String authInfo_md5 = SimpleMD5.getMD5(authInfo_plain, 16);
-		// LOG.info(authInfo_md5);
-		return authInfo_md5 + "." + now.getTime();
-	}
+    public String getAuthKey(String client_id, String client_secret) {
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        String authInfo_plain = client_id + client_secret + "AT" + now.getTime();
+        String authInfo_md5 = getMD5(authInfo_plain, 16);
+        // String authInfo_md5 = SimpleMD5.getMD5(authInfo_plain, 16);
+        // LOG.info(authInfo_md5);
+        return authInfo_md5 + "." + now.getTime();
+    }
 
-	private String getMD5(String text, int length) {
-		StringBuilder sb = new StringBuilder(40);
-		try {
-			MessageDigest MD5 = MessageDigest.getInstance("MD5");
-			byte[] info_mid = MD5.digest(text.getBytes());
-			for (byte x : info_mid) {
-				if ((x & 0xff) >> 4 == 0) {
-					sb.append("0").append(Integer.toHexString(x & 0xff));
-				} else {
-					sb.append(Integer.toHexString(x & 0xff));
-				}
-			}
+    private String getMD5(String text, int length) {
+        StringBuilder sb = new StringBuilder(40);
+        try {
+            MessageDigest MD5 = MessageDigest.getInstance("MD5");
+            byte[] info_mid = MD5.digest(text.getBytes());
+            for (byte x : info_mid) {
+                if ((x & 0xff) >> 4 == 0) {
+                    sb.append("0").append(Integer.toHexString(x & 0xff));
+                } else {
+                    sb.append(Integer.toHexString(x & 0xff));
+                }
+            }
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-		if (length == 16){
-			return sb.toString().substring(8, 24);
-		}
-		else {
-			return sb.toString();
-		}
-	}
+        if (length == 16) {
+            return sb.toString().substring(8, 24);
+        } else {
+            return sb.toString();
+        }
+    }
 
-	public static void main(String[] args) {
-		String log4jPath = AuthKeyGen.class.getClassLoader().getResource("").getPath() + "log4j.properties";
-		// PropertyConfigurator.configure(log4jPath);
-		System.out.println(log4jPath);
-		// LOG.info("~~~~~~~~~~~~~");
-		
+    public static void main(String[] args) {
+        String log4jPath = AuthKeyGen.class.getClassLoader().getResource("").getPath() + "log4j.properties";
+        // PropertyConfigurator.configure(log4jPath);
+        System.out.println(log4jPath);
+        // LOG.info("~~~~~~~~~~~~~");
+
 //		// 订单
 //		 String appKey = "9F4E4F9A379C47C38FD598EB5DB0CE37";
 //		 System.out.println("MSP-AppKey : " + appKey);
@@ -62,24 +60,37 @@ public class AuthKeyGen {
 //		System.out.println("MSP-AppKey : " + appKey);
 //		String client_id = "EEC05A24D05A4E38ABFC09B9AD01E8B6";
 //		String client_secret = "C36A9665558242478A458CDA320A153B";
-		
-		// //权限
+
+        // //权限
 //		 String appKey = "FA0C4B2415AD407691074E49AA892059";
 //		 System.out.println("MSP-AppKey : " + appKey);
 //		 String client_id = "593D6ECB8933491082FFE55BB2E2E63E";
 //		 String client_secret = "7051FD3F43B54099A6B8240434910DB8";
-		
-		// //权限
-		 String appKey = "C47660F7A5D844CA9D1976AC544DC6B9";
-		 System.out.println("MSP-AppKey : " + appKey);
-		 String client_id = "168E9C9A4ED14CECB1FEA97BB152C963";
-		 String client_secret = "0AE005BDE2394DE0BD992B77D60A0B3F";
-		//17商城
+
+        // //权限
+//		 String appKey = "C47660F7A5D844CA9D1976AC544DC6B9";
+//		 System.out.println("MSP-AppKey : " + appKey);
+//		 String client_id = "168E9C9A4ED14CECB1FEA97BB152C963";
+//		 String client_secret = "0AE005BDE2394DE0BD992B77D60A0B3F";
+        //
+//		 String appKey = "7623D0A85A424CA0AD1BE3139E442496";
+//		 System.out.println("MSP-AppKey : " + appKey);
+//		 String client_id = "5AEDC0BC15C44AF5843529B2C4AD21ED";
+//		 String client_secret = "46CE515B4DDB48289320985B69F8EE70";
+        //17商城
 //		String appKey = "99251023BA7549EAAA5AE76B2A4105CA";
 //		String client_id = "D66D5E88D26F499DA0B908A535D57922";
 //		String client_secret = "6285985EA18B43F3891ACF8DCA6FF62A";
-		AuthKeyGen akg = new AuthKeyGen();
-		String authKey = akg.getAuthKey(client_id, client_secret);
-		System.out.println("MSP-AuthKey: " + authKey);
-	}
+
+
+      //公司正式
+        String appKey = "40A3DD0E2C574E5B9491CB502BCEAD13";
+        String client_id = "08544BF7533F44648C24BE30D95EDCCA";
+        String client_secret = "980D0CDB678D425BA0D2B67F24C254BD";
+
+
+        AuthKeyGen akg = new AuthKeyGen();
+        String authKey = akg.getAuthKey(client_id, client_secret);
+        System.out.println("MSP-AuthKey: " + authKey);
+    }
 }

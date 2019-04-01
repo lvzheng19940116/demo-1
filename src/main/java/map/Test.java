@@ -24,8 +24,12 @@ public class Test {
 		List<Emp> list=new ArrayList<Emp>();
 		Emp emp =new Emp("1","lvzheng","18");
 		Emp emp1 =new Emp("2","boy","18");
+
+		System.out.println(list.isEmpty());
 		list.add(emp);
 		list.add(emp1);
+		System.out.println(list.isEmpty());
+
 		map.put("item", list);
 		 for (Object value :map.values()) {
 		      System.out.println(value);

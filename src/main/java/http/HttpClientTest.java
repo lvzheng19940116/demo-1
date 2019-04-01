@@ -34,20 +34,20 @@ import java.io.InputStreamReader;
 public class HttpClientTest {
     public static void main(String[] args) {
         CloseableHttpClient client = HttpClients.createDefault();
-        String url="https://www.world-check.com/premium-dynamic-download/?lag=DAY&format=TSV-GZ";
+       // String url="https://www.world-check.com/premium-dynamic-download/?lag=DAY&format=TSV-GZ";
+        String url="https://www.world-check.com/portal/Downloads/world-check-deleted-v2.csv.gz";
 //		String url3="https://www.apiopen.top/journalismApi";
 //		String url2="https://api.weixin.qq.com/sns/oauth2/access_token?appid=appid&code=code&grant_type=authorization_code";
         HttpGet get=new HttpGet(url);
         ProtocolVersion protocolVersion = get.getProtocolVersion();
-        System.out.println(protocolVersion.getProtocol());
         try {
             //该网页需要认证（用户名、密码）
             HttpClientContext context=new HttpClientContext();
             CredentialsProvider credentialsProvider=new BasicCredentialsProvider();
-            credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials("ThRe1207", "Welcome82"));
+            credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials("ThRe0206", "Westin9999"));
             context.setCredentialsProvider(credentialsProvider);
             CloseableHttpResponse execute = client.execute(get, context);
-            //----以下一样
+
             HttpEntity entity = execute.getEntity();
             InputStream in = entity.getContent();
             StringBuilder builder=new StringBuilder();
