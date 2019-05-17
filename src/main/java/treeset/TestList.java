@@ -1,6 +1,9 @@
 package treeset;
 
+import org.springframework.util.StringUtils;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,7 +19,15 @@ public class TestList {
 			System.out.println(i);
 		}
 		System.out.println("0000");
-		
+
+
+		String str = "a,b,c";
+		List<String> aaa = Arrays.asList(StringUtils.commaDelimitedListToStringArray(str));
+		System.out.println(aaa);
 	}
+
+
+
+
 
 }

@@ -17,21 +17,45 @@ public class ParameterDefault {
 
     /**
      * java默认参数
+     *
      * @param givenName
      * @param familyName
      * @return
      */
-    public String getName(String givenName,String familyName){
-        return givenName+"."+familyName;
+    public String getName(String givenName, String familyName) {
+        return givenName + "." + familyName;
     }
-    public String getName(String givenName){
-        return getName(givenName,"Xie");
+
+    public String getName(String givenName) {
+        return getName(givenName, "Xie");
     }
+
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        ParameterDefault parameterDefault=new ParameterDefault();
+        //java默认参数
+        ParameterDefault parameterDefault = new ParameterDefault();
         System.out.println(parameterDefault.getName("AAA"));
         System.out.println(parameterDefault.getName("AAA", "Liu"));
+
+        //java 可变参数
+        System.out.println(parameterDefault.get());
     }
+
+    /**
+     * java 可变参数
+     *
+     * @param str
+     * @return
+     */
+    public String add(String... str) {
+        return "true";
+    }
+
+    public String get() {
+        String add = this.add("aaa");
+        String add1 = this.add();
+        return add;
+    }
+
 
 }
