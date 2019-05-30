@@ -33,6 +33,7 @@ public class CallableTest implements Callable<String>{
 		try {
 			//获取值
 			String string = future.get();
+			System.out.println(string);
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}finally {

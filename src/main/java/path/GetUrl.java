@@ -37,6 +37,7 @@ public class GetUrl {
         System.out.println(rootPath);
 
         String path = ResourceUtils.getURL("classpath:static/font/simsun.ttc").getPath();
+        String path4 = ResourceUtils.getURL("classpath:").getPath();
         System.out.println(path);
 
         String path1 = new ClassPathResource("static/font/simsun.ttc").getFile().getPath();

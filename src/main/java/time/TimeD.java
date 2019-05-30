@@ -8,7 +8,7 @@ import java.util.Date;
 * 创建时间：2018年2月1日 下午2:53:03
 */
 public class TimeD {
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		   Date date = new Date();
            Calendar calendar = Calendar.getInstance();
            calendar.setTime(date);
@@ -17,7 +17,8 @@ public class TimeD {
            System.out.println(shipmentdate);
            calendar.add(Calendar.DATE, 4);
            Date deliverydate = calendar.getTime();
-           System.out.println(deliverydate);*/
-	//}
+           System.out.println(deliverydate);
+           String s="";
+	}
 
 }
