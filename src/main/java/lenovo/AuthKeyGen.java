@@ -49,11 +49,11 @@ public class AuthKeyGen {
         System.out.println(log4jPath);
         // LOG.info("~~~~~~~~~~~~~");
 
-//		// 订单
-//		 String appKey = "9F4E4F9A379C47C38FD598EB5DB0CE37";
-//		 System.out.println("MSP-AppKey : " + appKey);
-//		 String client_id = "7A040F4F27CD48E48CF3D7E8D89F05B4";
-//		 String client_secret = "6A87231D8FC4456A9C97924556F3860B";
+		// 订单
+		 String appKey = "9F4E4F9A379C47C38FD598EB5DB0CE37";
+		 System.out.println("MSP-AppKey : " + appKey);
+		 String client_id = "7A040F4F27CD48E48CF3D7E8D89F05B4";
+		 String client_secret = "6A87231D8FC4456A9C97924556F3860B";
 //
 //		// 合同
 //		String appKey = "C4C8FBF74A12429B91E916DE9EED7144";
@@ -82,11 +82,12 @@ public class AuthKeyGen {
 //		String client_id = "D66D5E88D26F499DA0B908A535D57922";
 //		String client_secret = "6285985EA18B43F3891ACF8DCA6FF62A";
 
+//
+//      //公司正式
+//        String appKey = "40A3DD0E2C574E5B9491CB502BCEAD13";
+//        String client_id = "08544BF7533F44648C24BE30D95EDCCA";
+//        String client_secret = "980D0CDB678D425BA0D2B67F24C254BD";
 
-      //公司正式
-        String appKey = "40A3DD0E2C574E5B9491CB502BCEAD13";
-        String client_id = "08544BF7533F44648C24BE30D95EDCCA";
-        String client_secret = "980D0CDB678D425BA0D2B67F24C254BD";
 
 
         AuthKeyGen akg = new AuthKeyGen();

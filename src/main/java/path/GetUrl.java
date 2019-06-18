@@ -27,6 +27,11 @@ public class GetUrl {
     public static void main(String[] args) throws Exception {
 
 
+        String path44 = ResourceUtils.getURL("classpath:").getPath();
+        System.out.println(path44);
+        String p1 = System.getProperty("user.dir");
+        System.out.println(p1);
+
         String fontPath = Optional.ofNullable(ClassUtils.getDefaultClassLoader())
                 .map(classLoader -> classLoader.getResource("static/font/simsun.ttc"))
                 .map(URL::getPath)

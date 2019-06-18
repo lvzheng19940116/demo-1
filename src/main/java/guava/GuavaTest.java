@@ -1,11 +1,12 @@
 package guava;
 
+import com.example.demo.test1.Temp;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 /**
 *以动手实践为荣,以只看不练为耻.
@@ -30,9 +31,20 @@ public class GuavaTest {
 		ArrayList<Object> newArrayList = Lists.newArrayList();
 		HashMap<Object, Object> newHashMap = Maps.newHashMap();
 		Map<String,Object > map=new HashMap<String,Object>(256);
+
+
+		Temp emp=new Temp();
+		GuavaTest.add(emp);
+		System.out.println(emp.getId());
+
 	}
 	
-	
+	public static void add(Temp emp){
+
+		emp.setId(1);
+
+
+	}
 	
 	
 	

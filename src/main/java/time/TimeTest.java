@@ -3,8 +3,7 @@ package time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import org.apache.commons.lang3.StringUtils;
+import java.util.Random;
 
 /**
 *以动手实践为荣,以只看不练为耻.
@@ -21,9 +20,19 @@ import org.apache.commons.lang3.StringUtils;
 */
 public class TimeTest {
 	public static void main(String[] args) {
+		Random rm = new Random();
 
-	
-	
+		// 获得随机数
+		double pross = (rm.nextDouble()) ;
+		System.out.println(pross);
+		// 将获得的获得随机数转化为字符串
+		String fixLenthString = String.valueOf(pross);
+
+		// 返回固定的长度的随机数
+		String substring = fixLenthString.substring(2, 12);
+		System.out.println(substring);
+
+
 //		String time="1256006105375";
 //		Date date=new Date(Long.parseLong(time)); 
 //		SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 

@@ -1,20 +1,19 @@
 package com.example.demo.test;
 
-import java.util.List;
+import lombok.Data;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import lombok.Data;
+import java.util.List;
 
 
 @Data
 @Entity
 public class User {
 	@Id
-	private int id;
+	private Integer id;
 	private String name;
 	private String age;
 	private String sex;
