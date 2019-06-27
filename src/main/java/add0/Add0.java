@@ -19,31 +19,32 @@ public class Add0 {
 
         String ba = "000012";
         int length = ba.length();
+        System.out.println(length);
         int i3 = Integer.parseInt(ba);
         System.out.println(i3);
-        String str11 = String.format("%0" + length + "d", Integer.valueOf(i3));
+        String str11 = String.format("%0" + length+ "d", Integer.valueOf(i3));
 
         System.out.println(str11);
 
 
-
-        int youNumber = 1;
-        // 0 代表前面补充0
-        // 10代表长度为10
-        // d 代表参数为正数型
-        String s = "9";
-        String s1 = "10";
-        String s2 = s1 + s;
-        System.out.println(s2);
-        String str = String.format("%0" + s + "d", Integer.valueOf(s2));
-        // 0000000001
-        System.out.println(str);
-        System.out.println(str.length());
-
-
-        Integer i = 10;
-        Integer i1 = 10;
-        Integer i2 = i + i1;
-        System.out.println(i2);
+//
+//        int youNumber = 1;
+//        // 0 代表前面补充0
+//        // 10代表长度为10
+//        // d 代表参数为正数型
+//        String s = "9";
+//        String s1 = "10";
+//        String s2 = s1 + s;
+//        System.out.println(s2);
+//        String str = String.format("%0" + s + "d", Integer.valueOf(s2));
+//        // 0000000001
+//        System.out.println(str);
+//        System.out.println(str.length());
+//
+//
+//        Integer i = 10;
+//        Integer i1 = 10;
+//        Integer i2 = i + i1;
+//        System.out.println(i2);
     }
 }
