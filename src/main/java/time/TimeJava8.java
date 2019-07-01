@@ -40,6 +40,19 @@ public class TimeJava8 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        //字符串转时间
+        String str1="2018-07-05 12:24:12";
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime parse = LocalDateTime.parse(str1, dtf);
+        System.out.println("-----" + parse);
+        //时间转字符串
+        LocalDateTime ldt = LocalDateTime.now();
+        System.out.println(ldt);
+        DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH:mm:ss");
+        String format66 = ldt.format(dtf1);
+        System.out.println("-----" + format66);
+
+
 
         String format = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         System.out.println(format);
@@ -50,6 +63,7 @@ public class TimeJava8 {
         LocalTime localTime = LocalTime.now();
         System.out.println("当前时间" + localTime);
 
+        //哪天
         LocalDate today = LocalDate.now();
         System.out.println(today);
         //多少天
