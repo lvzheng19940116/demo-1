@@ -66,6 +66,13 @@ public class TimeJava8 {
         //哪天
         LocalDate today = LocalDate.now();
         System.out.println(today);
+
+        // minusYears 减去一年  月，日，小时... LocalDate.now().minusMonth(1) ,  LocalDate.now().minusDays(1)...
+        //前一天
+        LocalDate date = today.minusDays(1);
+        //增加加一年
+        LocalDate localDate = today.plusYears(1);
+
         //多少天
         int dayOfYear = today.getDayOfYear();
         System.out.println(dayOfYear);
