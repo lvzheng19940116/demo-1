@@ -32,6 +32,9 @@ public class Listrepeat {
         List<String> A = new ArrayList<String>();
         A.add("C");
         A.add("D");
+        System.out.println(A.size());
+
+
 
         List<String> B = new ArrayList<String>();
         B.add("C");

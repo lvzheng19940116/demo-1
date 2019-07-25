@@ -18,14 +18,17 @@ import java.util.Map;
  */
 public class MapPut {
     public static void main(String[] args) {
-        Map<String, String> map=new HashMap<String, String>();
+        Map<String, String> map = new HashMap<String, String>();
+        if (true) {
 
-        map.put("abc","123");
-        map.put("aaa","123");
+            map.put("abc", "123");
+            map.put("aaa", "123");
+            System.out.println(map);
+            return;
+        }
+        map.put("abc", "456");
         System.out.println(map);
-        map.put("abc","456");
-        System.out.println(map);
-        map.put("abc","789");
+        map.put("abc", "789");
         System.out.println(map);
     }
 }

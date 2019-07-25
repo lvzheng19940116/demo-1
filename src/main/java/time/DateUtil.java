@@ -20,7 +20,8 @@ public class DateUtil {
     public static void main(String[] args) {
         LocalDate localDate=LocalDate.now();
         LocalDate date = localDate.minusDays(1);
-        String string = DateUtil.dateToString(date, "yyyyMMdd");
+      //  String string = DateUtil.dateToString(date, "yyyyMMdd");
+        String string = DateUtil.dateToString(date, "yyyyMM");
         System.out.println(string);
     }
 

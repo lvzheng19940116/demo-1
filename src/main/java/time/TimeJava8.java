@@ -81,7 +81,7 @@ public class TimeJava8 {
         System.out.println(year);
         //几月
         int monthValue = today.getMonthValue();
-        System.out.println(monthValue);
+        System.out.println("-----------"+monthValue);
         //几号
         int dayOfMonth = today.getDayOfMonth();
         System.out.println(dayOfMonth);
