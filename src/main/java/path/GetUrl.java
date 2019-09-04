@@ -27,7 +27,7 @@ public class GetUrl {
     public static void main(String[] args) throws Exception {
 
 
-        String path44 = ResourceUtils.getURL("classpath:").getPath();
+        String path44 = ResourceUtils.getURL("classpath:static").getPath();
         System.out.println(path44);
         String p1 = System.getProperty("user.dir");
         System.out.println(p1);

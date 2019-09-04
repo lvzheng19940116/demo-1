@@ -17,7 +17,9 @@ public class Add0 {
 
     public static void main(String[] args) {
 
-        String ba = "000012";
+        String ba = "1000012";
+        String substring = ba.substring(1, ba.length());
+        System.out.println(substring);
         int length = ba.length()-1;
         System.out.println(length);
         int i3 = Integer.parseInt(ba);
