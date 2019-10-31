@@ -1,9 +1,6 @@
 package time;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.concurrent.TimeUnit;
@@ -65,23 +62,28 @@ public class TimeJava8 {
 
         //哪天
         LocalDate today = LocalDate.now();
-        System.out.println(today);
+        Month month = today.getMonth();
+
+
 
         // minusYears 减去一年  月，日，小时... LocalDate.now().minusMonth(1) ,  LocalDate.now().minusDays(1)...
         //前一天
         LocalDate date = today.minusDays(1);
         //增加加一年
         LocalDate localDate = today.plusYears(1);
+        LocalDate localDate1 = today.minusMonths(8);
+        System.out.println("月份"+localDate1);
+        System.out.println(localDate1.getMonthValue());
 
         //多少天
         int dayOfYear = today.getDayOfYear();
         System.out.println(dayOfYear);
         //哪年、
         int year = today.getYear();
-        System.out.println(year);
+        System.out.println("nian"+year);
         //几月
         int monthValue = today.getMonthValue();
-        System.out.println("-----------"+monthValue);
+        System.out.println("yue"+monthValue);
         //几号
         int dayOfMonth = today.getDayOfMonth();
         System.out.println(dayOfMonth);
@@ -111,5 +113,8 @@ public class TimeJava8 {
         //判断该月天数
         int days = today.lengthOfMonth();
 
+        //上个月最后一天
+        LocalDate dat = today.minusMonths(1).with(TemporalAdjusters.lastDayOfMonth());
+        System.out.println(dat);
     }
 }
