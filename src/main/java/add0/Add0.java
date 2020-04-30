@@ -17,14 +17,14 @@ public class Add0 {
 
     public static void main(String[] args) {
 
-        String ba = "1000012";
+        String ba = "100002";
         String substring = ba.substring(1, ba.length());
         System.out.println(substring);
         int length = ba.length()-1;
         System.out.println(length);
         int i3 = Integer.parseInt(ba);
         System.out.println(i3);
-        String str11 = String.format("%0" + length+ "d", Integer.valueOf(i3));
+        String str11 = String.format("%0" + 10+ "d", Integer.valueOf(i3));
 
         System.out.println(str11);
 

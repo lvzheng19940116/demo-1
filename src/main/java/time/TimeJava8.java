@@ -3,6 +3,7 @@ package time;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -19,6 +20,19 @@ import java.util.concurrent.TimeUnit;
  * 创建时间：2019/6/17 4:40 PM
  */
 public class TimeJava8 {
+    //2020-12-12 00:00:00
+    public static Date getStartDate(Date date) {
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()), ZoneId.systemDefault());
+        LocalDateTime endOfDay = localDateTime.with(LocalTime.MIN.withNano(0));
+        return Date.from(endOfDay.atZone(ZoneId.systemDefault()).toInstant());
+    }
+    //2020-12-12 59:59:59
+    public static Date getEndDate(Date date) {
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()), ZoneId.systemDefault());
+        LocalDateTime endOfDay = localDateTime.with(LocalTime.MAX.withNano(0));
+        return Date.from(endOfDay.atZone(ZoneId.systemDefault()).toInstant());
+
+    }
     public static void main(String[] args) {
 
 
@@ -64,7 +78,7 @@ public class TimeJava8 {
         LocalDate today = LocalDate.now();
         Month month = today.getMonth();
 
-
+        System.out.println("after10"+today.plusDays(10));
 
         // minusYears 减去一年  月，日，小时... LocalDate.now().minusMonth(1) ,  LocalDate.now().minusDays(1)...
         //前一天
@@ -116,5 +130,11 @@ public class TimeJava8 {
         //上个月最后一天
         LocalDate dat = today.minusMonths(1).with(TemporalAdjusters.lastDayOfMonth());
         System.out.println(dat);
+
+
+        LocalDate today3 = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth());
+        LocalDate with = today3.minusMonths(1).with(TemporalAdjusters.lastDayOfMonth());
+
+        System.out.println(with);
     }
 }
