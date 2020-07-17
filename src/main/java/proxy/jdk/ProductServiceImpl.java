@@ -1,4 +1,4 @@
-package proxy;
+package proxy.jdk;
 
 public class ProductServiceImpl  implements  ProductService{
     @Override

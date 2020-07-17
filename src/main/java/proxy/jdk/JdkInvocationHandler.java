@@ -1,4 +1,4 @@
-package proxy;
+package proxy.jdk;
 
 
 import java.lang.reflect.InvocationHandler;
@@ -7,6 +7,9 @@ import java.lang.reflect.Proxy;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * jdk动态代理
+ */
 public class JdkInvocationHandler implements InvocationHandler {
 
 
