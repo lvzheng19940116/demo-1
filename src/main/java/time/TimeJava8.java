@@ -35,6 +35,12 @@ public class TimeJava8 {
     }
     public static void main(String[] args) {
 
+          int count =10003;
+        int i = count % 10000;
+        System.out.println(i);
+
+        int i1 = count /10000;
+        System.out.println(i1);
 
 //        TimeUnit.DAYS          //天
 //        TimeUnit.HOURS         //小时

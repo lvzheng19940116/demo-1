@@ -42,16 +42,23 @@ public class SplitString {
 //
 //        System.out.println("end:"+a);
 
-        String s="Document posted successfully: BKPFF 040000004900012019 ECQCLNT301";
-        int i = s.indexOf("0");
-        String substring = s.substring(i, i + 18);
-        System.out.println(substring);
-        String substring1 = substring.substring(0, 10);
-        System.out.println(substring1);
-        String substring2 = substring.substring(10, 14);
-        System.out.println(substring2);
-        String substring3 = substring.substring(14, 18);
-        System.out.println(substring3);
+        String str="以下客户单号[P597231433813537504,P597231387792524503]已生成计划，无法撤单";
+        int startIndex = str.indexOf("[") + 1;
+        int endIndex = str.indexOf("]") ;
+        String substring4 = str.substring(startIndex, endIndex);
+        System.out.println(substring4);
+
+//
+//        String s="Document posted successfully: BKPFF 040000004900012019 ECQCLNT301";
+//        int i = s.indexOf("0");
+//        String substring = s.substring(i, i + 18);
+//        System.out.println(substring);
+//        String substring1 = substring.substring(0, 10);
+//        System.out.println(substring1);
+//        String substring2 = substring.substring(10, 14);
+//        System.out.println(substring2);
+//        String substring3 = substring.substring(14, 18);
+//        System.out.println(substring3);
     }
 
     @Data
