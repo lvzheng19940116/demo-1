@@ -137,10 +137,11 @@ public class TimeJava8 {
         LocalDate dat = today.minusMonths(1).with(TemporalAdjusters.lastDayOfMonth());
         System.out.println(dat);
 
-
-        LocalDate today3 = LocalDate.now().with(TemporalAdjusters.lastDayOfMonth());
-        LocalDate with = today3.minusMonths(1).with(TemporalAdjusters.lastDayOfMonth());
-
-        System.out.println(with);
+        //本周周一
+        LocalDate monday = today.with(TemporalAdjusters.previousOrSame( DayOfWeek.MONDAY));
+        System.out.println("MONDAY："+monday);
+        //本周周日
+        LocalDate sunday = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY ));
+        System.out.println("SUNDAY："+sunday);
     }
 }
