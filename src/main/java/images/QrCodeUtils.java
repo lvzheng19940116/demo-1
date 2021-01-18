@@ -145,10 +145,10 @@ public class QrCodeUtils {
      */
     @Test
     public void testWriteQRImg() {
-        String text = "http://blog.healerjean.top";
+        String text = "吕正是你爸爸";
         BufferedImage noLogoImage = writeQRImg(text, 200, 200, 4);
         //存储到本地
-        String saveFilePath = "/Users/healerjean/Desktop/new.png";
+        String saveFilePath = "d:" + "/" + "new.jpg";
         saveImageToLocalDir(noLogoImage, saveFilePath);
     }
 
@@ -439,6 +439,7 @@ public class QrCodeUtils {
 
     /**
      * 8、 添加图片水印
+     *
      * @param image
      * @param imageLogo
      * @param moreMark
