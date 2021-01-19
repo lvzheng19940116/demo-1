@@ -7,42 +7,42 @@ package staticclass;
  * @author LvZheng 创建时间：2018年9月7日 上午9:32:26
  */
 public class ClassStatic {
-	// 静态内部类
-	private static class name {
+    // 静态内部类
+    private static class name {
 
-	}
+    }
 
-	// 普通内部类（成员内部类）
-	private class name1 {
+    // 普通内部类（成员内部类）
+    private class name1 {
 
-	}
+    }
 
-	// 方法内部类（局部内部类）
-	public void name() {
+    // 方法内部类（局部内部类）
+    public void name() {
 
-		class lvclass {
+        class lvclass {
 
-		}
+        }
 
-		// 匿名内部类  （方法内部类）
-		Runnable runnable = new Runnable() {
+        // 匿名内部类  （方法内部类）
+        Runnable runnable = new Runnable() {
 
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
 
-			}
-		};
-	}
+            }
+        };
+    }
 
-	// 匿名内部类（成员内部类）
-	Runnable runnable = new Runnable() {
+    // 匿名内部类（成员内部类）
+    Runnable runnable = new Runnable() {
 
-		@Override
-		public void run() {
-			// TODO Auto-generated method stub
+        @Override
+        public void run() {
+            // TODO Auto-generated method stub
 
-		}
-	};
+        }
+    };
 
 }

@@ -8,58 +8,64 @@ package single;
  */
 public class SingleTest {
 
-	// 单例模式 懒汉
-	private static SingleTest instance = null;
+    // 单例模式 懒汉
+    private static SingleTest instance = null;
 
-	private SingleTest() {
-		//防止反射破解单例
-		if (instance!=null){
-			throw new RuntimeException();
-		}
-	};
+    private SingleTest() {
+        //防止反射破解单例
+        if (instance != null) {
+            throw new RuntimeException();
+        }
+    }
 
-	// 锁的模板
-	// 经典的 双重检查   由于编译优化原因，jvm底层内部模型原因。偶尔会出问题不建议使用
-	public static SingleTest getInstance() {
-		// abc 提高已经存在对象的效率
-		if (null == instance) {
-			// a 创建对象
-			synchronized (SingleTest.class) {
-				if (null == instance) {
-					instance = new SingleTest();
-				}
-			}
-		} // bc直接获取
-		return instance;
-	}
+    ;
+
+    // 锁的模板
+    // 经典的 双重检查   由于编译优化原因，jvm底层内部模型原因。偶尔会出问题不建议使用
+    public static SingleTest getInstance() {
+        // abc 提高已经存在对象的效率
+        if (null == instance) {
+            // a 创建对象
+            synchronized (SingleTest.class) {
+                if (null == instance) {
+                    instance = new SingleTest();
+                }
+            }
+        } // bc直接获取
+        return instance;
+    }
 }
 
 class SingleTest1 {
-	// 单例模式 饿汉
-	private static SingleTest1 instance = new SingleTest1();
+    // 单例模式 饿汉
+    private static SingleTest1 instance = new SingleTest1();
 
-	private SingleTest1() {
-	};
+    private SingleTest1() {
+    }
 
-	public static SingleTest1 getInstance() {
+    ;
 
-		return instance;
-	}
+    public static SingleTest1 getInstance() {
+
+        return instance;
+    }
 }
 
 class SingleTest2 {
-	// 加强版饿汉模式
-	// 类在使用的时候加载 延缓类的加载 属性一定会初始化
-	private static class SingleTestHolder {
-		// 单例模式 饿汉
-		private static SingleTest2 instance = new SingleTest2();
-	}
+    // 加强版饿汉模式
+    // 类在使用的时候加载 延缓类的加载 属性一定会初始化
+    private static class SingleTestHolder {
+        // 单例模式 饿汉
+        private static SingleTest2 instance = new SingleTest2();
+    }
 
-	private SingleTest2() {
-	};
+    private SingleTest2() {
+    }
 
-	public static SingleTest2 getInstance() {
+    ;
 
-		return SingleTestHolder.instance;
-	}
+    public static SingleTest2 getInstance() {
+
+        return SingleTestHolder.instance;
+    }
 }

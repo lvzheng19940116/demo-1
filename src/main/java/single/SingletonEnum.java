@@ -7,14 +7,15 @@ package single;
  * @author LvZheng 创建时间：2018年9月12日 上午9:35:51
  */
 public enum SingletonEnum {
-	
-	
-	//SingletonEnum.INSTANCE调用
-	//枚举元素本身就是单例对象（没有延时加载）
-	INSTANCE;
-	//添加自己需要的操作
-	public void test() {
-		
-	}
-	
+
+
+    //SingletonEnum.INSTANCE调用
+    //枚举元素本身就是单例对象（没有延时加载）
+    INSTANCE;
+
+    //添加自己需要的操作
+    public void test() {
+
+    }
+
 }

@@ -10,16 +10,16 @@ import java.io.UnsupportedEncodingException;
  * @author LvZheng 创建时间：2018年6月22日 下午2:43:59
  */
 public class App {
-	public static void main(String[] args) {
-		// 解码 url
-		try {
-			java.net.URLDecoder.decode("", "utf-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-	}
+    public static void main(String[] args) {
+        // 解码 url
+        try {
+            java.net.URLDecoder.decode("", "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
-	public void name(HttpServletRequest request) {
-	}
+    public void name(HttpServletRequest request) {
+    }
 }

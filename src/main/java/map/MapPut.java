@@ -24,7 +24,7 @@ public class MapPut {
             map.put("abc", "123");
             map.put("aaa", "123");
             System.out.println(map);
-            return;
+           // return;
         }
         map.put("abc", "456");
         System.out.println(map);

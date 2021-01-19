@@ -24,6 +24,7 @@ public class CharTest {
         String b="abcdef";
         StringBuffer sb = new StringBuffer(b);
         StringBuffer reverse = sb.reverse();
+        System.out.println("--------");
         System.out.println(reverse.toString());
         System.out.println(Runtime.getRuntime().freeMemory());
         System.out.println(Runtime.getRuntime().totalMemory());

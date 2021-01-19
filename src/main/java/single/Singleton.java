@@ -7,31 +7,32 @@ package single;
  * @author LvZheng 创建时间：2018年9月12日 上午9:35:51
  */
 public class Singleton {
-	//饿汉式 类初始化立即加载 由于加载类时天然线程安全方法没有同步效率高
-	private static Singleton instance = new Singleton();
+    //饿汉式 类初始化立即加载 由于加载类时天然线程安全方法没有同步效率高
+    private static Singleton instance = new Singleton();
 
-	private Singleton() {
+    private Singleton() {
 
-	}
+    }
 
-	public static Singleton getsingleton() {
+    public static Singleton getsingleton() {
 
-		return instance;
-	}
+        return instance;
+    }
 
 }
 
 //懒汉式  延时加载/懒加载  用的时候在加载  多个线程调用（并发） 效率低下
-class Singlenton1{
-	private static Singlenton1 instance =null;
-	
-	private Singlenton1() {}
-	
-	public static synchronized Singlenton1 getinstance() {
-		if (null==instance) {
-			instance=new Singlenton1();
-		}
-		return instance;
-	}
-	
+class Singlenton1 {
+    private static Singlenton1 instance = null;
+
+    private Singlenton1() {
+    }
+
+    public static synchronized Singlenton1 getinstance() {
+        if (null == instance) {
+            instance = new Singlenton1();
+        }
+        return instance;
+    }
+
 }

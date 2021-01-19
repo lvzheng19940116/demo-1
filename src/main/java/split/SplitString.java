@@ -42,9 +42,9 @@ public class SplitString {
 //
 //        System.out.println("end:"+a);
 
-        String str="以下客户单号[P597231433813537504,P597231387792524503]已生成计划，无法撤单";
+        String str = "以下客户单号[P597231433813537504,P597231387792524503]已生成计划，无法撤单";
         int startIndex = str.indexOf("[") + 1;
-        int endIndex = str.indexOf("]") ;
+        int endIndex = str.indexOf("]");
         String substring4 = str.substring(startIndex, endIndex);
         System.out.println(substring4);
 
@@ -62,12 +62,12 @@ public class SplitString {
     }
 
     @Data
-  static   class A{
+    static class A {
 
-        private  String status;
-        private  String name;
-        private  String flag;
-        private  String url;
+        private String status;
+        private String name;
+        private String flag;
+        private String url;
 
     }
 
