@@ -1,14 +1,11 @@
 package images;
 
-
 import com.google.common.collect.Maps;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.stereotype.Component;
+import sun.font.FontDesignMetrics;
 
 import javax.imageio.ImageIO;
-import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -16,23 +13,20 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author LvZheng
- * @date 2021/1/11
+ * @date 2021/1/26
  */
-@Slf4j
-@Component
-public class ImagesUtil {
-
+public class ImagesU {
     /**
      * 文字生成图片
      * 小于等于2取前两个 等于三取后两个  大于等于4取4个
@@ -72,59 +66,54 @@ public class ImagesUtil {
         gc.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         gc.setBackground(colorBg);
         gc.clearRect(0, 0, width, height);
-        // 写入文字
-        //   Font cFont = new Font("微软雅黑", Font.BOLD, 128);
         Font cFont = getFont();
         gc.setColor(colorFont);
         gc.setFont(cFont);
         FontMetrics cFontM = gc.getFontMetrics(cFont);
-        // 字符串长度（像素）
         int cW = cFontM.stringWidth(content);
-        log.info("字符串长度{}", cW);
-        // 算出行数
-        int lineSize = (int) Math.ceil(cW * 1.0 / width);
-        log.info("算出行数{}", lineSize);
-        //字体高度
-        int fontHeight = (int) cFont.getSize2D();
-        // 字体基线到最上方的距离
         int ascent = cFontM.getAscent();
-        // 字体的基线到大多数字母数字的底部
         int descent = cFontM.getDescent();
         // int a,b;
         int x = 0;
         int y = 0;
-        if (content.length() == 2) {
+        if (content.length() <= 2 || cW < width) {
             x = width / 2 - cW / 2;
             y = (height - (ascent + descent)) / 2 + ascent;
             gc.drawString(content, x, y);
         } else {
             //需要换行  页面宽度（width）小于 字符串长度
             if (cW > width) {
-                // 存储每一行的字符串
-                StringBuilder sb = new StringBuilder();
-                int j = 0;
-                int tempStart = 0;
-                // 存储换行之后每一行的字符串
-                String tempStrs[] = new String[lineSize];
+                int rowWidth = 0;   //已用字当前行宽度
+                int tempWidth;
+                String lineString = "";
+                List<String> contentLineList = new ArrayList<String>();
+                List<Integer> contentLineWidth = new ArrayList<Integer>();
+                FontDesignMetrics metrics = FontDesignMetrics.getMetrics(cFont);
+                int fontHeight = metrics.getHeight();
+                //每个新增字体宽度增加后如果超过文本框宽度就换行，没超过就不换行
                 for (int i = 0; i < content.length(); i++) {
-                    char ch = content.charAt(i);
-                    sb.append(ch);
-                    Rectangle2D bounds2 = cFontM.getStringBounds(sb.toString(), null);
-                    //文字累计宽度
-                    int tempStrPilexlWildth = (int) bounds2.getWidth();
-                    if (tempStrPilexlWildth > width) {
-                        tempStrs[j++] = content.substring(tempStart, i);
-                        tempStart = i;
-                        sb.delete(0, sb.length());
-                        sb.append(ch);
+                    tempWidth = rowWidth;//存之前的情况
+                    rowWidth = rowWidth + metrics.charWidth(content.charAt(i));
+
+                    if (rowWidth > width) {
+                        contentLineList.add(lineString);
+                        contentLineWidth.add(tempWidth);
+                        rowWidth = metrics.charWidth(content.charAt(i));
+                        lineString = "" + content.charAt(i);
+                    } else {
+                        lineString = lineString + content.charAt(i);
                     }
+
+                    //最后一个字
                     if (i == content.length() - 1) {
-                        // 最后一行
-                        tempStrs[j] = content.substring(tempStart);
+                        contentLineList.add(lineString);
+                        contentLineWidth.add(rowWidth);
                     }
                 }
-                for (int i = 0; i < tempStrs.length; i++) {
-                    gc.drawString(tempStrs[i], 5, (fontHeight + 5) * (i + 1));
+
+                //图片上写入每行文字  每行居中实现
+                for (int i = 0; i < contentLineList.size(); i++) {
+                    gc.drawString(contentLineList.get(i), (width - contentLineWidth.get(i)) / 2 + 5, (fontHeight + 5) * (i + 1));
                 }
             }
 
@@ -139,12 +128,10 @@ public class ImagesUtil {
     public static Font getFont() {
         Font font = null;
         try {
-            // 解决中文支持问题
             ClassPathResource classPathResource = new ClassPathResource("static/font/simkai.ttf");
             InputStream inputStream = classPathResource.getInputStream();
             Font tempFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-            //适应图片比例
-            font = tempFont.deriveFont(Font.BOLD, 118);
+            font = tempFont.deriveFont(Font.BOLD, 118 * 4);
             GraphicsEnvironment ge = GraphicsEnvironment
                     .getLocalGraphicsEnvironment();
         } catch (Exception e) {
@@ -156,76 +143,29 @@ public class ImagesUtil {
 
     private static Color randomBg() {
         Map<Integer, Color> maps = Maps.newHashMap();
-        maps.put(1, Color.cyan);
-        maps.put(2, Color.blue);
-        maps.put(3, Color.green);
-        maps.put(4, Color.gray);
-        maps.put(5, Color.magenta);
-        maps.put(6, Color.orange);
-        maps.put(7, Color.yellow);
-        maps.put(8, Color.pink);
-        int i = (int) (Math.random() * 8) + 1;
-        log.info("随机数：{}", i);
+        maps.put(1, new Color(0, 212, 184));
+        maps.put(2, new Color(59, 117, 252));
+        maps.put(3, new Color(143, 82, 246));
+        maps.put(4, new Color(252, 152, 36));
+
+        int i = (int) (Math.random() * 4) + 1;
         Color color;
-        if (0 < i && i < 9) {
+        if (0 < i && i < 5) {
             color = maps.get(i);
         } else {
-            color = Color.gray;
+            color = new Color(0, 212, 184);
         }
         return color;
     }
 
-
-    /**
-     * 图片做圆角处理
-     * @param image
-     * @param cornerRadius
-     * @return
-     */
-    public static BufferedImage makeRoundedCorner(BufferedImage image, int cornerRadius) {
-        int w = image.getWidth();
-        int h = image.getHeight();
-        BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2 = output.createGraphics();
-        g2.setComposite(AlphaComposite.Src);
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(Color.WHITE);
-        g2.fill(new RoundRectangle2D.Float(0, 0, w, h, cornerRadius, cornerRadius));
-        g2.setComposite(AlphaComposite.SrcAtop);
-        g2.drawImage(image, 0, 0, null);
-        g2.dispose();
-        return output;
-    }
-    /**
-     * 判断字符串是否为中文
-     * @param str
-     * @return
-     */
-    public static boolean isChinese(String str) {
-        String regEx = "[\\u4e00-\\u9fa5]+";
-        Pattern p = Pattern.compile(regEx);
-        Matcher m = p.matcher(str);
-        if (m.find())
-            return true;
-        else
-            return false;
-    }
-
-
     public static void main(String[] args) {
         //汉字是270  数字是142
-        BufferedImage aaa = createImages("abcd", 270, 270);
+        BufferedImage aaa = createImages("8524", 1080, 1200);
         try {
             ImageIO.write(aaa, "JPG", new File("d:" + "/" + UUID.randomUUID().toString() + ".jpg"));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //-7
-        //183
-
-        //57
-        //183
-
-
     }
+
 }
