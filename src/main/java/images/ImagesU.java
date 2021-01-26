@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author LvZheng
@@ -94,12 +96,16 @@ public class ImagesU {
                 for (int i = 0; i < content.length(); i++) {
                     tempWidth = rowWidth;//存之前的情况
                     rowWidth = rowWidth + metrics.charWidth(content.charAt(i));
-
+                    System.out.println(metrics.charWidth(content.charAt(i)));
                     if (rowWidth > width) {
                         contentLineList.add(lineString);
                         contentLineWidth.add(tempWidth);
                         rowWidth = metrics.charWidth(content.charAt(i));
-                        lineString = "" + content.charAt(i);
+                        if (!isChinese(String.valueOf(content.charAt(i)))) {
+                            lineString = content.charAt(i) + " ";
+                        } else {
+                            lineString = "" + content.charAt(i);
+                        }
                     } else {
                         lineString = lineString + content.charAt(i);
                     }
@@ -158,9 +164,25 @@ public class ImagesU {
         return color;
     }
 
+    /**
+     * 判断字符串是否为中文
+     *
+     * @param str
+     * @return
+     */
+    public static boolean isChinese(String str) {
+        String regEx = "[\\u4e00-\\u9fa5]+";
+        Pattern p = Pattern.compile(regEx);
+        Matcher m = p.matcher(str);
+        if (m.find())
+            return true;
+        else
+            return false;
+    }
+
     public static void main(String[] args) {
         //汉字是270  数字是142
-        BufferedImage aaa = createImages("8524", 1080, 1200);
+        BufferedImage aaa = createImages("你好123", 1080, 1200);
         try {
             ImageIO.write(aaa, "JPG", new File("d:" + "/" + UUID.randomUUID().toString() + ".jpg"));
         } catch (Exception e) {
