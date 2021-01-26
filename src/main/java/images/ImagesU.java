@@ -101,11 +101,7 @@ public class ImagesU {
                         contentLineList.add(lineString);
                         contentLineWidth.add(tempWidth);
                         rowWidth = metrics.charWidth(content.charAt(i));
-                        if (!isChinese(String.valueOf(content.charAt(i)))) {
-                            lineString = content.charAt(i) + " ";
-                        } else {
-                            lineString = "" + content.charAt(i);
-                        }
+                        lineString = "" + content.charAt(i);
                     } else {
                         lineString = lineString + content.charAt(i);
                     }
