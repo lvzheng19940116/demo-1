@@ -10,6 +10,14 @@ import java.util.concurrent.locks.ReentrantLock;
  * 创建时间：2021/2/7 下午3:32
  */
 public class ConditionDemo {
+
+    /**
+     * ReentantLock 继承接口 Lock 并实现了接口中定义的方法，他是一种可重入锁，除了能完
+     * 成 synchronized 所能完成的所有工作外，还提供了诸如可响应中断锁、可轮询锁请求、定时锁等
+     * 避免多线程死锁的方法。
+     *
+     * @param args
+     */
     private static final ReentrantLock lock = new ReentrantLock();
     private static final Condition condition = lock.newCondition();
 
