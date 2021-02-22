@@ -26,11 +26,13 @@ public class ReentrantLockService {
 
     public static void main(String[] args) {
 
+        Object o = "";
 
         //创建 Condition
         Condition condition = reentrantLock.newCondition();
 
         try {
+            System.out.println(Integer.MAX_VALUE);
             //lock 加锁
             reentrantLock.lock();
             //1：wait 方法等待：
