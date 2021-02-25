@@ -13,7 +13,7 @@ package paramdefault;
  * @author LvZheng
  * 创建时间：2018/11/12 下午4:04
  */
-public class ParameterDefault {
+public class DefaultParameter {
 
     /**
      * java默认参数
@@ -33,7 +33,7 @@ public class ParameterDefault {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         //java默认参数
-        ParameterDefault parameterDefault = new ParameterDefault();
+        DefaultParameter parameterDefault = new DefaultParameter();
         System.out.println(parameterDefault.getName("AAA"));
         System.out.println(parameterDefault.getName("AAA", "Liu"));
 
