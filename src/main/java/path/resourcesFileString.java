@@ -5,12 +5,14 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.ResourceUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
@@ -23,18 +25,22 @@ import java.util.Map;
 public class resourcesFileString {
 
 
-
     public void pdf(HttpServletResponse response) {
 
         File file = null;
         String content = "";
         try {
+
+            //获取文件生成字符串
+            ClassPathResource classPathResource = new ClassPathResource("templates/test.html");
+            InputStream inputStream = classPathResource.getInputStream();
+            String dd = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+
+            //牛逼工具类
+            //todo FileUtils ResourceUtils IOUtils
+
             //获取resources下文件
             file = ResourceUtils.getFile("classpath:templates/test.html");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
             //文件转字符串
             content = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
         } catch (IOException e) {
