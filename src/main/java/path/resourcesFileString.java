@@ -37,7 +37,7 @@ public class resourcesFileString {
             String dd = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
 
             //牛逼工具类
-            //todo FileUtils ResourceUtils IOUtils
+            //todo  FileUtils ResourceUtils IOUtils
 
             //获取resources下文件
             file = ResourceUtils.getFile("classpath:templates/test.html");
