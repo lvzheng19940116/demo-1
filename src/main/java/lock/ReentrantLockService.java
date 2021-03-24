@@ -40,6 +40,7 @@ public class ReentrantLockService {
             //condition.await(1L, TimeUnit.SECONDS);
             System.out.println("执行await-1");
             condition.await();
+          //  condition.await(1L, TimeUnit.SECONDS);
             System.out.println("执行await-2");
             //通过创建 Condition 对象来使线程 wait，必须先执行 lock.lock 方法获得锁
             //:2：signal 方法唤醒
